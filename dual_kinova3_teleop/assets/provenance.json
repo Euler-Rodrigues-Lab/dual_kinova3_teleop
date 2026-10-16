@@ -1,0 +1,177 @@
+{
+  "source_commit": "24e3c96ce3c8cdc3069be9efb5440201df61d49c",
+  "files": {
+    "source/robot/robot.xml": {
+      "source": "projects/dual_kinova3_teleop/dual_kinova3/robot.xml",
+      "sha256": "a7057dbaf47e6f2beb532efe2cd5ea86b8b66976090afc722ede3dd8c135d63d"
+    },
+    "source/robot/meshes/base_link.stl": {
+      "source": "projects/dual_kinova3_teleop/dual_kinova3/meshes/base_link.stl",
+      "sha256": "3e38517e653d58f4160cfdcee34c9dea983d8b3ecb8f2c147444f58235335260"
+    },
+    "source/robot/meshes/shoulder_link.stl": {
+      "source": "projects/dual_kinova3_teleop/dual_kinova3/meshes/shoulder_link.stl",
+      "sha256": "a98e232e5197f09e9cd520e7a450c21bcec74bc49e2a19ce7cf86c5dc25f2e18"
+    },
+    "source/robot/meshes/half_arm_1_link.stl": {
+      "source": "projects/dual_kinova3_teleop/dual_kinova3/meshes/half_arm_1_link.stl",
+      "sha256": "8df461a71780d8e2d09104a507584424279d85173adf14867e359f7e58b3bba7"
+    },
+    "source/robot/meshes/half_arm_2_link.stl": {
+      "source": "projects/dual_kinova3_teleop/dual_kinova3/meshes/half_arm_2_link.stl",
+      "sha256": "8a9f38de21648804b3ab7076ec73726031f2ade7c95eb2541d070553e025407b"
+    },
+    "source/robot/meshes/forearm_link.stl": {
+      "source": "projects/dual_kinova3_teleop/dual_kinova3/meshes/forearm_link.stl",
+      "sha256": "a00d96d2c7ec37e9fe4c5fb6d3fa2b4386dfd48fea5ac25632f4cb83b3505105"
+    },
+    "source/robot/meshes/spherical_wrist_1_link.stl": {
+      "source": "projects/dual_kinova3_teleop/dual_kinova3/meshes/spherical_wrist_1_link.stl",
+      "sha256": "0b97a5e3b2de535344f8e8d4176d77f0cdb3455b235f35430fa0413208856e66"
+    },
+    "source/robot/meshes/spherical_wrist_2_link.stl": {
+      "source": "projects/dual_kinova3_teleop/dual_kinova3/meshes/spherical_wrist_2_link.stl",
+      "sha256": "12271fb7d0ee78fb5642424cf5078be20f0476061e74203db964b674031ce879"
+    },
+    "source/robot/meshes/bracelet_no_vision_link.stl": {
+      "source": "projects/dual_kinova3_teleop/dual_kinova3/meshes/bracelet_no_vision_link.stl",
+      "sha256": "5b2ec7dafbf6a3c9a2cac717d18132a8a1efd9fcb8f2c40d9c12c8ece7323ec8"
+    },
+    "source/robot/meshes/dual_arm_torso_coarse.STL": {
+      "source": "projects/dual_kinova3_teleop/dual_kinova3/meshes/dual_arm_torso_coarse.STL",
+      "sha256": "c2fb1e12d02ff4fed04219a9d3e9eda92dd5bb3649e7bd77ddbe79f45e38eb59"
+    },
+    "source/robotiq/2f85_v4.xml": {
+      "source": "projects/dual_kinova3_teleop/grippers/2f85_v4.xml",
+      "sha256": "38033dff2cb75450136dc6bddc45df0cb0b905ab3d3ba02e01cb1199460edba0"
+    },
+    "source/robotiq/meshes/2f85_v4/base.stl": {
+      "source": "projects/dual_kinova3_teleop/grippers/meshes/2f85_v4/base.stl",
+      "sha256": "1019b87c1dcff4a08a2fdca2dfd4893d60a5e2fc53512c6b5fe2e372b75c9aa3"
+    },
+    "source/robotiq/meshes/2f85_v4/base_coupling.stl": {
+      "source": "projects/dual_kinova3_teleop/grippers/meshes/2f85_v4/base_coupling.stl",
+      "sha256": "6a2517f9d6d78f89d9edb617fb93a279b4d52ac61c12d9cb743c701676eeb06d"
+    },
+    "source/robotiq/meshes/2f85_v4/c-a01-85-open.stl": {
+      "source": "projects/dual_kinova3_teleop/grippers/meshes/2f85_v4/c-a01-85-open.stl",
+      "sha256": "13ad73ef491f6f28b9ed6b8fbb3d6fb45896110ea7d415cda1689fc8daa5d925"
+    },
+    "source/robotiq/meshes/2f85_v4/driver.stl": {
+      "source": "projects/dual_kinova3_teleop/grippers/meshes/2f85_v4/driver.stl",
+      "sha256": "baf8b4dde18ce59eeebc0928a289c69dccec9da81bb186e2838e2e304274e106"
+    },
+    "source/robotiq/meshes/2f85_v4/coupler.stl": {
+      "source": "projects/dual_kinova3_teleop/grippers/meshes/2f85_v4/coupler.stl",
+      "sha256": "54949f7355c35c976d854fb77272feb92d9201213e343a8852429556fc81d416"
+    },
+    "source/robotiq/meshes/2f85_v4/spring_link.stl": {
+      "source": "projects/dual_kinova3_teleop/grippers/meshes/2f85_v4/spring_link.stl",
+      "sha256": "56e9f28ce90841d654ab6d953161aeb62142b1459c210335d5862e7fcb281aab"
+    },
+    "source/robotiq/meshes/2f85_v4/follower.stl": {
+      "source": "projects/dual_kinova3_teleop/grippers/meshes/2f85_v4/follower.stl",
+      "sha256": "28811d3651345dbb5f2020c67d3bd05f754b5e3e791e379c3c4d1d87418bb9c5"
+    },
+    "source/robotiq/meshes/2f85_v4/tongue.stl": {
+      "source": "projects/dual_kinova3_teleop/grippers/meshes/2f85_v4/tongue.stl",
+      "sha256": "2bd5df8a2132542703d40d94be36a990bbc3eabe070283232871147081348d52"
+    },
+    "source/psyonic_right/ability_right_hand_corrected.xml": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/ability_right_hand_corrected.xml",
+      "sha256": "242c3024f9b0d01a3e0c999ff92811099d0b09908b5d45f8d667a285c3ed057e"
+    },
+    "source/psyonic_right/visual/wristmesh.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/wristmesh.obj",
+      "sha256": "bbba82def982ca550dc5a1f5d2129a249895e80998a8116aff7e0d25ce17130f"
+    },
+    "source/psyonic_right/collision/wristmesh_C.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/collision/wristmesh_C.obj",
+      "sha256": "a99574bf0107d22dbd2cbf52952c8a071cb52cfbb376d23fd4149dc84dfdc933"
+    },
+    "source/psyonic_right/visual/FB_palm_ref_MIR.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/FB_palm_ref_MIR.obj",
+      "sha256": "26ca1cfb231d747224ce0b4f746f6e094ed2596d038c00b492a13674cc4b4e9a"
+    },
+    "source/psyonic_right/collision/FB_palm_ref_MIR.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/collision/FB_palm_ref_MIR.obj",
+      "sha256": "3c9b4d71c44741c8d1fc96eee3971a035b6097e4072ece37f4d7c2d93213b14c"
+    },
+    "source/psyonic_right/visual/thumb-F1-MIR.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/thumb-F1-MIR.obj",
+      "sha256": "c17073d7166aa71a3ba35bf4536c949a95a6ab4566a7b151b2c2714283fd62aa"
+    },
+    "source/psyonic_right/collision/thumb-F1-MIR_C.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/collision/thumb-F1-MIR_C.obj",
+      "sha256": "2117c804e9ebd079c954820af15d6740f1cf218d925e58d99a38f0622e5022d6"
+    },
+    "source/psyonic_right/visual/thumb-F2.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/thumb-F2.obj",
+      "sha256": "575cf0f348a59e847697d41342522eff7abafe17b1203633fe36355e4b16b1f5"
+    },
+    "source/psyonic_right/collision/thumb-F2_C.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/collision/thumb-F2_C.obj",
+      "sha256": "186605c96ffcced5b180b255808f497d1242bbc029c15f6f2871d0c1886d9f45"
+    },
+    "source/psyonic_right/visual/idx-F1.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/idx-F1.obj",
+      "sha256": "75b874a160bf756a10db31d99c55339ebcb26bc429c5ebcc6b01222f81026006"
+    },
+    "source/psyonic_right/visual/idx-F2.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/idx-F2.obj",
+      "sha256": "458b603364e916b3a45e7d93b12f94d8b1e84fdaa2f48609765bb1e2c36a39cf"
+    },
+    "source/psyonic_right/collision/idx-F2_C.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/collision/idx-F2_C.obj",
+      "sha256": "2605321cd4488e22589a8ab98567822974fec885a8beaede23eac3cf071e6838"
+    },
+    "source/psyonic_left/ability_left_hand_corrected.xml": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/ability_left_hand_corrected.xml",
+      "sha256": "72d634ed88500227bdc9b4ba6bb911fad0ee061b03bce34078146aa31de0c879"
+    },
+    "source/psyonic_left/visual/wristmesh.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/wristmesh.obj",
+      "sha256": "bbba82def982ca550dc5a1f5d2129a249895e80998a8116aff7e0d25ce17130f"
+    },
+    "source/psyonic_left/collision/wristmesh_C.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/collision/wristmesh_C.obj",
+      "sha256": "a99574bf0107d22dbd2cbf52952c8a071cb52cfbb376d23fd4149dc84dfdc933"
+    },
+    "source/psyonic_left/visual/FB_palm_ref.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/FB_palm_ref.obj",
+      "sha256": "5ffd7705b618756c71fee073d6799b3dae4bb68fb870246a4791a142cc3d11b7"
+    },
+    "source/psyonic_left/collision/FB_palm_ref.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/collision/FB_palm_ref.obj",
+      "sha256": "f4f9a1b8d2930d23384cc46016f61cfee227b61a4e1a1fdeb226e80b254b3d3b"
+    },
+    "source/psyonic_left/visual/thumb-F1.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/thumb-F1.obj",
+      "sha256": "e8a595336b0baefc72e7859d4c6d25ceb3d33076fccead439032bbfa9135c20b"
+    },
+    "source/psyonic_left/collision/thumb-F1_C.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/collision/thumb-F1_C.obj",
+      "sha256": "9f309eaf2aba8d54741e8ea278a0c0e5a0f4c6e42ce4593cf4c0763e81e6c095"
+    },
+    "source/psyonic_left/visual/thumb-F2.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/thumb-F2.obj",
+      "sha256": "575cf0f348a59e847697d41342522eff7abafe17b1203633fe36355e4b16b1f5"
+    },
+    "source/psyonic_left/collision/thumb-F2_C.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/collision/thumb-F2_C.obj",
+      "sha256": "186605c96ffcced5b180b255808f497d1242bbc029c15f6f2871d0c1886d9f45"
+    },
+    "source/psyonic_left/visual/idx-F1.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/idx-F1.obj",
+      "sha256": "75b874a160bf756a10db31d99c55339ebcb26bc429c5ebcc6b01222f81026006"
+    },
+    "source/psyonic_left/visual/idx-F2.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/visual/idx-F2.obj",
+      "sha256": "458b603364e916b3a45e7d93b12f94d8b1e84fdaa2f48609765bb1e2c36a39cf"
+    },
+    "source/psyonic_left/collision/idx-F2_C.obj": {
+      "source": "projects/psyonic_hand_teleop/ability_hand/collision/idx-F2_C.obj",
+      "sha256": "2605321cd4488e22589a8ab98567822974fec885a8beaede23eac3cf071e6838"
+    }
+  }
+}

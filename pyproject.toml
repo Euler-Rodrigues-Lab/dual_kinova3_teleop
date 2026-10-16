@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dual-kinova3-teleop"
+version = "0.1.0"
+description = "DualKinova3 bimanual teleoperation with licensed Rust retargeting and shared XRT input"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT; robot assets retain their upstream license" }
+authors = [{name = "Chuizheng Kong"}]
+dependencies = ["numpy", "scipy", "mujoco>=3.3", "geo-kin-core", "xrt-devices>=0.1.0"]
+
+[project.optional-dependencies]
+devices = ["xrt-devices[xr,recording]"]
+mediapipe = ["xrt-devices[mediapipe]"]
+test = ["pytest"]
+render = ["pillow"]
+hardware = ["pyserial>=3.5"]
+
+[project.scripts]
+dual-kinova3-teleop = "dual_kinova3_teleop.demos.teleop:main"
+
+[tool.uv.sources]
+geo-kin-core = {path = "external/geo_kin_core", editable = true}
+xrt-devices = {path = "external/XRT_devices", editable = true}
+
+[tool.geo-kin]
+product = "dual_kinova3"
+
+[tool.setuptools.packages.find]
+include = ["dual_kinova3_teleop*"]
+
+[tool.setuptools.package-data]
+dual_kinova3_teleop = ["assets/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

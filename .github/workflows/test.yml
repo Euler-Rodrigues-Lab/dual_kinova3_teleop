@@ -1,0 +1,12 @@
+name: Test
+on: [push, pull_request]
+jobs:
+  application:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --extra test --python 3.12
+      - run: uv run pytest -q
