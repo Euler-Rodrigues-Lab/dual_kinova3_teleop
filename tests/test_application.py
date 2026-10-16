@@ -54,6 +54,7 @@ def test_cli_defaults():
     from dual_kinova3_teleop.demos.replay_offline import parse_args
     args=parse_args([])
     assert args.variant=='robotiq' and not args.no_safety_filter
+    assert args.retarget_mode == 'tcp'
     assert args.frames==str(SAMPLE_MOTIONS['ipman_roll'])
 
 
@@ -85,3 +86,12 @@ def test_viewer_waits_for_renderer_cleanup(monkeypatch):
     with passive_viewer(None, None):
         assert not cleaned.is_set()
     assert cleaned.is_set()
+
+
+@pytest.mark.parametrize('mode,expected', [('eef','tcp'),('tcp','tcp'),('pose','pose')])
+def test_retarget_mode_alias_for_live_and_replay(mode, expected):
+    from dual_kinova3_teleop.demos.teleop import parser
+    from dual_kinova3_teleop.demos.replay_offline import parse_args
+    assert parser().parse_args(['--retarget-mode',mode]).retarget_mode == expected
+    assert parse_args(['--retarget-mode',mode]).retarget_mode == expected
+    assert parser().parse_args([]).retarget_mode == 'tcp'

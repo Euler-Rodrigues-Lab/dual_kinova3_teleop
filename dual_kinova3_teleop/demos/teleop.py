@@ -22,7 +22,9 @@ def parser():
     p.add_argument('--playback-speed', type=float, default=1.0)
     p.add_argument('--loop', action='store_true')
     p.add_argument('--rate', type=float, default=60.0)
-    p.add_argument('--retarget-mode', choices=['pose','tcp'], default='pose')
+    p.add_argument('--retarget-mode', choices=['pose','tcp'], default='tcp',
+                   type=lambda mode: 'tcp' if mode == 'eef' else mode,
+                   help='TCP-focused retargeting (default; eef is an alias), or pose; both use tracked elbows')
     p.add_argument('--no-safety-filter', action='store_true')
     p.add_argument('--no-functional-offset', action='store_true')
     p.add_argument('--limited', action='store_true')
@@ -100,7 +102,7 @@ def run(args):
                 viewer.opt.geomgroup[0] = 0
             overlay = ReplayOverlay(viewer, show_human=not args.no_human_overlay,
                                     show_safety=not args.no_safety_filter)
-        print('DualKinova3 backend: licensed Rust; model: original DualKinova3 MJCF; variant: ' + args.variant)
+        print('DualKinova3 backend: licensed Rust; model: original DualKinova3 MJCF; variant: ' + args.variant + '; retarget mode: ' + args.retarget_mode)
         video = None
         if args.video:
             from dual_kinova3_teleop.video import ReplayVideo

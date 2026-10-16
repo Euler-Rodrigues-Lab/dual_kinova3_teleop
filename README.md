@@ -9,7 +9,7 @@ Two Kinova Gen3 arms with **Robotiq 2F-85 V4** grippers or **Psyonic Ability** h
 | Robotiq | [MP4](docs/media/robotiq_mustard.mp4) | [MP4](docs/media/robotiq_ipman.mp4) |
 | Psyonic | [MP4](docs/media/psyonic_mustard.mp4) | [MP4](docs/media/psyonic_ipman.mp4) |
 
-The preview shows Robotiq on the left and Psyonic on the right. Blue is the captured human skeleton; green is the solver's safety geometry.
+The preview shows Robotiq on the left and Psyonic on the right, recorded in pose mode. Blue is the captured human skeleton; green is the solver's safety geometry.
 
 ## Setup
 
@@ -48,7 +48,7 @@ uv run python -m dual_kinova3_teleop.demos.replay_offline --sample ipman_roll
 uv run python -m dual_kinova3_teleop.demos.replay_offline --sample picking_up_mustard --variant psyonic
 ```
 
-Replay defaults to kinematic updates, the safety filter, a human overlay and hidden left/right MuJoCo panels. Use `--no-human-overlay` to hide the skeleton or `--no-safety-filter` to disable both filtering and safety visualization. `--retarget-mode tcp` selects TCP retargeting instead of the default pose mode. `--limited` enables arm joint limits in simulation.
+Replay defaults to kinematic updates, the safety filter, a human overlay and hidden left/right MuJoCo panels. Use `--no-human-overlay` to hide the skeleton or `--no-safety-filter` to disable both filtering and safety visualization. TCP-focused (EEF) retargeting is the default for replay, live input and hardware. `--retarget-mode eef` is an alias for `--retarget-mode tcp`; both still use tracked elbows and the safety filter. Use `--retarget-mode pose` to restore pose-focused retargeting. `--limited` enables arm joint limits in simulation.
 
 ```bash
 # Fast headless validation; --steps 0 plays the complete clip.
