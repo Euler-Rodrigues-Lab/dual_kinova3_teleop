@@ -93,9 +93,8 @@ def run(args):
         overlay = None
         if not args.headless:
             import mujoco.viewer
-            from dual_kinova3_teleop.visualization import ReplayOverlay, configure_camera
-            viewer = stack.enter_context(mujoco.viewer.launch_passive(
-                model, data, show_left_ui=False, show_right_ui=False))
+            from dual_kinova3_teleop.visualization import ReplayOverlay, configure_camera, passive_viewer
+            viewer = stack.enter_context(passive_viewer(model, data))
             with viewer.lock():
                 configure_camera(viewer.cam)
                 viewer.opt.geomgroup[0] = 0

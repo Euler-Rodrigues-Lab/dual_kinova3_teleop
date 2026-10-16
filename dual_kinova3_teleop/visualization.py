@@ -31,3 +31,26 @@ class ReplayOverlay:
         if self.show_human:
             count += self.human.draw(frame)
         return count
+
+
+from contextlib import contextmanager
+import threading
+
+
+@contextmanager
+def passive_viewer(model, data):
+    """Keep Python alive until MuJoCo's daemon render thread releases GLFW."""
+    import mujoco.viewer
+    before = set(threading.enumerate())
+    viewer = mujoco.viewer.launch_passive(model, data, show_left_ui=False, show_right_ui=False)
+    # launch_passive exposes a handle but no join operation. Python 3.10+
+    # names the renderer thread after its target; restrict joining to the
+    # renderer created by this call (not XR or hardware workers).
+    render_threads = [t for t in threading.enumerate() if t not in before
+                      and t.name.endswith('(_launch_internal)')]
+    try:
+        yield viewer
+    finally:
+        viewer.close()
+        for thread in render_threads:
+            thread.join()

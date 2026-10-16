@@ -66,3 +66,22 @@ def test_video_preserves_capsule_length():
     np.testing.assert_allclose(dst.size, [.065,.065,.6])
     np.testing.assert_allclose(dst.pos, src.pos)
     np.testing.assert_allclose(dst.mat, src.mat)
+
+
+def test_viewer_waits_for_renderer_cleanup(monkeypatch):
+    import threading
+    import time
+    import mujoco.viewer
+    from dual_kinova3_teleop.visualization import passive_viewer
+    closed, cleaned = threading.Event(), threading.Event()
+    def launch(*args, **kwargs):
+        def renderer():
+            closed.wait()
+            time.sleep(.02)
+            cleaned.set()
+        threading.Thread(target=renderer, name='test (_launch_internal)', daemon=True).start()
+        return SimpleNamespace(close=closed.set)
+    monkeypatch.setattr(mujoco.viewer, 'launch_passive', launch)
+    with passive_viewer(None, None):
+        assert not cleaned.is_set()
+    assert cleaned.is_set()
