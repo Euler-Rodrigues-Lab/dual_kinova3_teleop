@@ -9,7 +9,7 @@ Two Kinova Gen3 arms with **Robotiq 2F-85 V4** grippers or **Psyonic Ability** h
 | Robotiq | [MP4](docs/media/robotiq_mustard.mp4) | [MP4](docs/media/robotiq_ipman.mp4) |
 | Psyonic | [MP4](docs/media/psyonic_mustard.mp4) | [MP4](docs/media/psyonic_ipman.mp4) |
 
-The preview shows Robotiq on the left and Psyonic on the right, recorded in pose mode. Blue is the captured human skeleton; green is the solver's safety geometry.
+The preview shows Robotiq on the left and Psyonic on the right, recorded in TCP-focused mode. Blue is the captured human skeleton; green is the solver's safety geometry.
 
 ## Setup
 
@@ -57,6 +57,12 @@ uv run python -m dual_kinova3_teleop.demos.replay_offline --headless --variant p
 MUJOCO_GL=egl uv run python -m dual_kinova3_teleop.demos.replay_offline \
   --headless --sample picking_up_mustard --variant psyonic --video mustard.mp4
 ```
+
+For Psyonic EEF/TCP mode, the TCP is the **index MCP joint**, on both the captured human hand and the mounted robot hand. Its robot offset is extracted from the original corrected Ability XMLs. Cyan marks the human index-MCP target; magenta marks the actual robot index MCP; a thin yellow line shows any residual. These markers share the human skeleton's capture-to-viewer transform and appear in both the live viewer and saved video. The overlay does not move the human target to hide reach or safety-filter errors. Missing index-MCP input holds that arm.
+
+If a TCP target falls outside the arm's geometric reach, simulation can align the robot shoulder midpoint with the captured shoulder midpoint, but only when this reduces the reach violation. Use `--no-shoulder-fallback` to keep the simulation base fixed. This fallback is disabled for both hardware modes; neither physical arm bases nor hardware coordinates are shifted. Safety filtering and joint limits can still prevent exact target coincidence.
+
+The index-MCP TCP and shoulder fallback require the updated `geo_kin` wheel; register a replacement build with `--replace`, then run `geo-kin-provision install` again.
 
 Other input: `--frames recording.npz` or `--csv recording.csv`. Playback controls: `--playback-speed 0.5`, `--loop`, `--steps 300`, `--rate 60`. The viewer and video use the same capsule endpoints, radii and world transform.
 
@@ -140,6 +146,6 @@ uv sync --extra test
 uv run pytest -q
 ```
 
-Public tests cover asset hashes, joint mapping, overlay dimensions, hardware units/protocol, stale-command stops and transport failure. Private migration tests compare 200 arm cases and 120 session frames against the original Python solver, plus Psyonic hand streams from both clips at `1e-9` tolerance. Independent FK checks compare both variants with MuJoCo. Both complete clips have been rendered for both variants. Hardware control is tested with dry-run/mocked transports; real robots and live XR have not been exercised.
+Public tests cover asset hashes, joint mapping, overlay dimensions, hardware units/protocol, stale-command stops and transport failure. Private migration tests compare 200 arm cases and 120 session frames against the original Python solver, plus Psyonic hand streams from both clips at `1e-9` tolerance. Independent FK checks compare both variants with MuJoCo. Both complete clips have been rendered for both variants. For the Psyonic index-MCP update, independent full-clip FK checks measured at most 0.67 mm target error before safety filtering. With the hardware safety profile enabled, median TCP error is about 3 mm for Ip Man and below 0.01 mm for mustard; transient maxima are 22.2 cm and 3.4 cm respectively as filtering displaces the target. The target markers show these residuals. Hardware control is tested with dry-run/mocked transports; real robots and live XR have not been exercised.
 
 Application code is MIT; original assets and submodules retain their respective terms. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). The solver wheel has its own license.

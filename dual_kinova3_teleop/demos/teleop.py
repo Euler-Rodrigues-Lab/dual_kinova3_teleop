@@ -27,6 +27,8 @@ def parser():
                    help='TCP-focused retargeting (default; eef is an alias), or pose; both use tracked elbows')
     p.add_argument('--no-safety-filter', action='store_true')
     p.add_argument('--no-functional-offset', action='store_true')
+    p.add_argument('--no-shoulder-fallback', action='store_true',
+                   help='Keep the simulation base fixed when TCP targets are out of reach')
     p.add_argument('--limited', action='store_true')
     p.add_argument('--host', default='0.0.0.0')
     p.add_argument('--port', type=int, default=8080)
@@ -68,7 +70,8 @@ def run(args):
     # cannot leave a camera or WebRTC process running.
     session = make_session(hand='psyonic' if args.variant=='psyonic' else None, collision_avoidance=not args.no_safety_filter,
                            retarget_mode=args.retarget_mode, limited=args.limited or args.hardware == 'live',
-                           functional_offset=not args.no_functional_offset)
+                           functional_offset=not args.no_functional_offset,
+                           shoulder_center_fallback=not args.no_shoulder_fallback and args.hardware == 'off')
     model = mujoco.MjModel.from_xml_path(str(scene_path(args.variant)))
     data = mujoco.MjData(model)
     controller = DualKinova3MuJoCoController(model, data, args.variant)
@@ -91,6 +94,7 @@ def run(args):
             source = open_motion_source(frames=args.frames, csv_file=args.csv, loop=args.loop,
                                         playback_speed=args.playback_speed)
             print(f"Motion source: {source.describe()}")
+        tcp_points = controller.get_tcp_positions if args.variant == 'psyonic' and args.retarget_mode == 'tcp' else None
         viewer = None
         overlay = None
         if not args.headless:
@@ -101,13 +105,13 @@ def run(args):
                 configure_camera(viewer.cam)
                 viewer.opt.geomgroup[0] = 0
             overlay = ReplayOverlay(viewer, show_human=not args.no_human_overlay,
-                                    show_safety=not args.no_safety_filter)
+                                    show_safety=not args.no_safety_filter, tcp_points=tcp_points)
         print('DualKinova3 backend: licensed Rust; model: original DualKinova3 MJCF; variant: ' + args.variant + '; retarget mode: ' + args.retarget_mode)
         video = None
         if args.video:
             from dual_kinova3_teleop.video import ReplayVideo
             video = stack.enter_context(ReplayVideo(model,args.video,args.video_fps,
-                show_human=not args.no_human_overlay,show_safety=not args.no_safety_filter))
+                show_human=not args.no_human_overlay,show_safety=not args.no_safety_filter, tcp_points=tcp_points))
         rig = None
         if args.hardware != 'off':
             from dual_kinova3_teleop.control.hardware import HardwareRig, KortexArm, DryRunArm

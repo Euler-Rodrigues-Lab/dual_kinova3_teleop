@@ -95,3 +95,21 @@ def test_retarget_mode_alias_for_live_and_replay(mode, expected):
     assert parser().parse_args(['--retarget-mode',mode]).retarget_mode == expected
     assert parse_args(['--retarget-mode',mode]).retarget_mode == expected
     assert parser().parse_args([]).retarget_mode == 'tcp'
+
+
+def test_index_tcp_overlay_uses_wrist_and_capture_transforms():
+    from geo_kin_core.types import RetargetFrame, SEWPose
+    from dual_kinova3_teleop.visualization import human_index_mcps
+    rotation=np.array([[0.,-1.,0.],[1.,0.,0.],[0.,0.,1.]])
+    frame=RetargetFrame(right_sew=SEWPose(np.zeros(3),np.zeros(3),np.array([.2,.3,.4]),rotation),
+        right_fingers={'index':{'index_finger_mcp':np.array([.1,0,0])}},
+        R_world_upper_body=rotation,p_world_upper_body=np.array([1.,2.,3.]))
+    session=SimpleNamespace(R_mocap_world=rotation,p_mocap_world=np.array([.5,1.,2.]))
+    expected=rotation.T@(np.array([1.,2.,3.])+rotation@np.array([.2,.4,.4])-np.array([.5,1.,2.]))
+    np.testing.assert_allclose(human_index_mcps(frame,session)['right'],expected)
+    assert 'left' not in human_index_mcps(frame,session)
+    model=mujoco.MjModel.from_xml_path(str(scene_path('psyonic')))
+    viewer=SimpleNamespace(user_scn=mujoco.MjvScene(model,maxgeom=10))
+    overlay=ReplayOverlay(viewer,show_human=False,tcp_points=lambda:{'right':expected})
+    assert overlay.draw(frame,session)==2
+    np.testing.assert_allclose(viewer.user_scn.geoms[0].pos,viewer.user_scn.geoms[1].pos)

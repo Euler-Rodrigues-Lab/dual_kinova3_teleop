@@ -29,6 +29,11 @@ class DualKinova3MuJoCoController:
         rotation=self.data.xmat[body].reshape(3,3).copy()
         position=self.data.xpos[body].copy()
         return lambda point: rotation @ point + position
+    def get_tcp_positions(self):
+        if self.variant != 'psyonic':
+            return {}
+        return {side: self.data.xpos[self.model.body(f'{side}_gripper_index_L1').id].copy()
+                for side in ('left', 'right')}
     def update_kinematic(self):
         for side in ('right','left'):
             goal=self.goals.get(f'q_goal_{side}')
