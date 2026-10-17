@@ -19,22 +19,22 @@ cd dual_kinova3_teleop
 uv sync
 ```
 
-Python 3.10+ is supported. Dual Kinova is a **free experimental product**:
-Robotiq and Psyonic sessions need no organization license and have no expiry.
-Download the Linux x86_64 wheel (glibc 2.34+) from the
-[free release](https://github.com/Euler-Rodrigues-Lab/vr_robosuite/releases/tag/experimental-dual-kinova3-v0.1.0).
+Python 3.10+ is supported. The free experimental `geo_kin` wheel is bundled in
+[`wheels/`](wheels/) and installed automatically by `uv sync` on Linux x86_64
+(glibc 2.34+). It supports both Robotiq and Psyonic, requires no organization
+license, and has no expiry. After updating an existing checkout, run:
 
 ```bash
-uv run geo-kin-provision register --product dual_kinova3 \
-  --wheel /path/to/geo_kin-0.1.0-cp310-abi3-manylinux_2_34_x86_64.whl --replace
-uv run geo-kin-provision install --product dual_kinova3
+git submodule update --init --recursive
+uv sync
+uv run python -c "import geo_kin; print(geo_kin.FREE_PRODUCTS)"
 ```
 
-For the Psyonic variant, register the **same wheel** as `dual_kinova3-psyonic`
-and install with `--product dual_kinova3-psyonic`. No `--license` or `--activate`
-argument is required. Existing licenses for other robot products remain intact;
-their license requirements are unchanged. Solver source remains proprietary;
-binary use and redistribution for this experimental product are free of charge.
+Other robot products retain their license requirements. Binary use and
+redistribution for this experimental product are free of charge; solver source
+remains proprietary. The grant and checksum accompany the wheel. For a consumer
+project using this repository as a submodule, add a `geo-kin` uv source pointing
+to this submodule's wheel (as in `vr_robosuite/pyproject.toml`).
 
 ## MuJoCo replay
 
