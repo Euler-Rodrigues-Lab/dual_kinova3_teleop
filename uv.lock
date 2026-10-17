@@ -412,7 +412,6 @@ name = "dual-kinova3-teleop"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "geo-kin", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'" },
     { name = "geo-kin-core" },
     { name = "mujoco" },
     { name = "numpy" },
@@ -439,7 +438,6 @@ test = [
 
 [package.metadata]
 requires-dist = [
-    { name = "geo-kin", marker = "platform_machine == 'x86_64' and sys_platform == 'linux'", path = "wheels/geo_kin-0.1.0-cp310-abi3-manylinux_2_34_x86_64.whl" },
     { name = "geo-kin-core", editable = "external/geo_kin_core" },
     { name = "mujoco", specifier = ">=3.3" },
     { name = "numpy" },
@@ -587,20 +585,6 @@ sdist = { url = "https://files.pythonhosted.org/packages/77/cd/9be253869fc42e764
 wheels = [
     { url = "https://files.pythonhosted.org/packages/6c/c0/a98505f18594f1bce828bb159cec0fcf9860562f1a2c85913409fc8f3d9e/fsspec-2026.9.0-py3-none-any.whl", hash = "sha256:8dd6e646e99ea382bd85f97a45e6b526a442d79423a7dc673f1e2756d05fcb5f", size = 221738 },
 ]
-
-[[package]]
-name = "geo-kin"
-version = "0.1.0"
-source = { path = "wheels/geo_kin-0.1.0-cp310-abi3-manylinux_2_34_x86_64.whl" }
-dependencies = [
-    { name = "numpy" },
-]
-wheels = [
-    { filename = "geo_kin-0.1.0-cp310-abi3-manylinux_2_34_x86_64.whl", hash = "sha256:f9ba3ce70e2f27a17ff8d902349458114e8e336849cbd6de4ceaaa27955defaa" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "numpy" }]
 
 [[package]]
 name = "geo-kin-core"

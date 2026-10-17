@@ -9,4 +9,4 @@ Euler-Rodrigues-Lab robot packages. Both use `geo_kin_core.frames/1`.
 | picking_up_mustard.npz | g1_teleop | 38c32eb839d89f4b203cf6ee8923028b595c2ff76a625321f934f2033f03a04f |
 
 The recordings contain human targets, not robot joint trajectories. All solver
-retargeting runs on OpenArm at replay time. Source/notes metadata is retained.
+retargeting runs on Dual Kinova3 at replay time. Source/notes metadata is retained.

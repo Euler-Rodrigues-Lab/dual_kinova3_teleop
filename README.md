@@ -19,24 +19,25 @@ cd dual_kinova3_teleop
 uv sync
 ```
 
-Python 3.10+ is supported. The free experimental `geo_kin` wheel is bundled in
-[`wheels/`](wheels/) and installed automatically by `uv sync` on Linux x86_64
-(glibc 2.34+). It supports both Robotiq and Psyonic, requires no organization
-license, and has no expiry. After updating an existing checkout, run:
+Python 3.10+ is supported. Solver wheels are selected explicitly with
+`geo-kin-provision install`; `uv sync` only installs application dependencies
+and preserves an existing provisioned selection. To select a registered full
+wheel, use `uv run geo-kin-provision install --project .`.
 
-```bash
-git submodule update --init --recursive
-uv sync
-uv run python -c "import geo_kin; print(geo_kin.FREE_PRODUCTS)"
-```
-
-Other robot products retain their license requirements. Binary use and
-redistribution for this experimental product are free of charge; solver source
-remains proprietary. The grant and checksum accompany the wheel. For a consumer
-project using this repository as a submodule, add a `geo-kin` uv source pointing
-to this submodule's wheel (as in `vr_robosuite/pyproject.toml`).
+The wheel in [`wheels/`](wheels/) is an optional **pose-only simulation demo**
+for the parent vr_robosuite application. Opt in from that application using
+`uv run geo-kin-provision install --project . --wheel external/dual_kinova3_teleop/wheels/geo_kin-0.1.0-cp310-abi3-manylinux_2_34_x86_64.whl`.
+A valid covering dev license always unlocks full pose/TCP access without the
+one-minute limit, including with the demo build. Unlicensed demo sessions share
+a 60-second process deadline from first solve, with no automatic resume.
+Redistribution, standalone use, and physical robot control are prohibited under
+the [free demo license](wheels/FREE_DUAL_KINOVA3.md). Other license grants remain
+separate. The wheel checksum accompanies it.
 
 ## MuJoCo replay
+
+The standalone replay, live-input and hardware commands below require a
+separate full-access license; the free demo grant covers vr_robosuite only.
 
 The bundled recordings are byte-identical to the G1/RBY1/OpenArm samples: 600 frames for Ip Man and 843 for mustard, sampled at 60 Hz.
 
@@ -45,7 +46,7 @@ uv run python -m dual_kinova3_teleop.demos.replay_offline --sample ipman_roll
 uv run python -m dual_kinova3_teleop.demos.replay_offline --sample picking_up_mustard --variant psyonic
 ```
 
-Replay defaults to kinematic updates, the safety filter, a human overlay and hidden left/right MuJoCo panels. Use `--no-human-overlay` to hide the skeleton or `--no-safety-filter` to disable both filtering and safety visualization. TCP-focused (EEF) retargeting is the default for replay, live input and hardware. `--retarget-mode eef` is an alias for `--retarget-mode tcp`; both still use tracked elbows and the safety filter. Use `--retarget-mode pose` to restore pose-focused retargeting. `--limited` enables arm joint limits in simulation.
+Replay defaults to kinematic updates, the safety filter, a human overlay and hidden left/right MuJoCo panels. Use `--no-human-overlay` to hide the skeleton or `--no-safety-filter` to disable both filtering and safety visualization. The standalone CLI defaults to TCP-focused (EEF) retargeting for replay, live input and hardware; the parent vr_robosuite app defaults to pose mode. `--retarget-mode eef` is an alias for `--retarget-mode tcp`; both still use tracked elbows and the safety filter. Use `--retarget-mode pose` to restore pose-focused retargeting. `--limited` enables arm joint limits in simulation.
 
 ```bash
 # Fast headless validation; --steps 0 plays the complete clip.
@@ -54,6 +55,11 @@ uv run python -m dual_kinova3_teleop.demos.replay_offline --headless --variant p
 MUJOCO_GL=egl uv run python -m dual_kinova3_teleop.demos.replay_offline \
   --headless --sample picking_up_mustard --variant psyonic --video mustard.mp4
 ```
+
+For Robotiq TCP mode, the target origin is the thumb/index fingertip midpoint.
+The thumb-to-index direction defines +Y; index MCP defines the orthogonalized
+approach direction +Z, and +X = Y × Z. This targets the mounted grasp site
+145 mm beyond the tool origin. Missing or degenerate landmarks hold that arm.
 
 For Psyonic EEF/TCP mode, the TCP is the **index MCP joint**, on both the captured human hand and the mounted robot hand. Its robot offset is extracted from the original corrected Ability XMLs. Cyan marks the human index-MCP target; magenta marks the actual robot index MCP; a thin yellow line shows any residual. These markers share the human skeleton's capture-to-viewer transform and appear in both the live viewer and saved video. The overlay does not move the human target to hide reach or safety-filter errors. Missing index-MCP input holds that arm.
 
