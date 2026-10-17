@@ -2,7 +2,7 @@
 
 ![Robotiq and Psyonic replay with human and safety overlays](docs/media/replay.gif)
 
-Two Kinova Gen3 arms with **Robotiq 2F-85 V4** grippers or **Psyonic Ability** hands, using the original SEW-Geometric-Teleop models. Licensed Rust `geo_kin` handles retargeting and the SEW safety filter; `XRT_devices` supplies XR, MediaPipe and recorded motion. Both shared packages are pinned Git submodules.
+Two Kinova Gen3 arms with **Robotiq 2F-85 V4** grippers or **Psyonic Ability** hands, using the original SEW-Geometric-Teleop models. Rust `geo_kin` handles retargeting and the SEW safety filter; `XRT_devices` supplies XR, MediaPipe and recorded motion. Both shared packages are pinned Git submodules.
 
 | Variant | Mustard replay | Ip Man replay |
 | --- | --- | --- |
@@ -19,25 +19,22 @@ cd dual_kinova3_teleop
 uv sync
 ```
 
-Python 3.10+ is supported. Obtain a Linux wheel and signed license covering `dual_kinova3`; Psyonic also requires `psyonic` compiled into the wheel and covered by the license. Wheels, licenses and private solver code are distributed separately.
+Python 3.10+ is supported. Dual Kinova is a **free experimental product**:
+Robotiq and Psyonic sessions need no organization license and have no expiry.
+Download the Linux x86_64 wheel (glibc 2.34+) from the
+[free release](https://github.com/Euler-Rodrigues-Lab/vr_robosuite/releases/tag/experimental-dual-kinova3-v0.1.0).
 
 ```bash
 uv run geo-kin-provision register --product dual_kinova3 \
-  --wheel /path/to/geo_kin.whl --license /path/to/geo_kin_license.toml \
-  --name my-lab --activate
-uv run geo-kin-provision install
+  --wheel /path/to/geo_kin-0.1.0-cp310-abi3-manylinux_2_34_x86_64.whl --replace
+uv run geo-kin-provision install --product dual_kinova3
 ```
 
-For the Psyonic variant, register/install the corresponding product:
-
-```bash
-uv run geo-kin-provision register --product dual_kinova3-psyonic \
-  --wheel /path/to/geo_kin.whl --license /path/to/geo_kin_license.toml \
-  --name my-lab --activate
-uv run geo-kin-provision install --product dual_kinova3-psyonic
-```
-
-Use `--replace` when registering a rebuilt wheel with the same filename. `--activate` selects the shared license; alternatively set `GEO_KIN_LICENSE=/absolute/path/to/license.toml` for this process. An existing `GEO_KIN_LICENSE` overrides the active license, so check it when a product unexpectedly fails license validation. This application explicitly requires the licensed backend.
+For the Psyonic variant, register the **same wheel** as `dual_kinova3-psyonic`
+and install with `--product dual_kinova3-psyonic`. No `--license` or `--activate`
+argument is required. Existing licenses for other robot products remain intact;
+their license requirements are unchanged. Solver source remains proprietary;
+binary use and redistribution for this experimental product are free of charge.
 
 ## MuJoCo replay
 
