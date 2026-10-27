@@ -1,8 +1,28 @@
 # Dual Kinova3 Teleoperation
 
+## Shared Python dependencies
+
+`geo_kin_core` and `xrt_devices` now come from versioned PyPI wheels, not Git
+submodules. The tested versions for this checkout are:
+
+```bash
+python -m pip install "eurola-geo-kin-core==0.1.2" "eurola-xrt-devices==0.1.2"
+```
+
+Normal project installation (`uv sync` or `pip install` with the project and its
+local robot/simulator dependencies) selects these versions automatically. Imports
+and the `geo-kin-provision` command are unchanged. Other robot, simulator, and
+hardware submodules remain where needed; `--recurse-submodules` below is for those.
+The private `geo_kin` solver and its license are still supplied separately.
+
+For shared-library development, explicitly install matching source checkouts with
+`python -m pip install -e /path/to/geo_kin_core -e /path/to/XRT_devices` and run the
+venv's Python directly. A subsequent `uv sync` restores the released packages.
+
+
 ![Robotiq and Psyonic replay with human and safety overlays](docs/media/replay.gif)
 
-Two Kinova Gen3 arms with **Robotiq 2F-85 V4** grippers or **Psyonic Ability** hands, using the original SEW-Geometric-Teleop models. Rust `geo_kin` handles retargeting and the SEW safety filter; `XRT_devices` supplies XR, MediaPipe and recorded motion. Both shared packages are pinned Git submodules.
+Two Kinova Gen3 arms with **Robotiq 2F-85 V4** grippers or **Psyonic Ability** hands, using the original SEW-Geometric-Teleop models. Rust `geo_kin` handles retargeting and the SEW safety filter; `XRT_devices` supplies XR, MediaPipe and recorded motion. Both shared packages are installed as versioned PyPI wheels.
 
 | Variant | Mustard replay | Ip Man replay |
 | --- | --- | --- |
@@ -14,7 +34,7 @@ The preview shows Robotiq on the left and Psyonic on the right, recorded in TCP-
 ## Setup
 
 ```bash
-git clone --recurse-submodules https://github.com/Euler-Rodrigues-Lab/dual_kinova3_teleop.git
+git clone https://github.com/Euler-Rodrigues-Lab/dual_kinova3_teleop.git
 cd dual_kinova3_teleop
 uv sync
 ```
